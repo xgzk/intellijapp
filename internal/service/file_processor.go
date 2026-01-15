@@ -100,7 +100,7 @@ func processVMOptionsFile(filePath, configPath string, logger *slog.Logger) erro
 	newConfigs := []string{
 		"--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED",
 		"--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED",
-		fmt.Sprintf("-javaagent:\"%s/ja-netfilter.jar\"=jetbrains", configPath),
+		fmt.Sprintf("-javaagent:%s/ja-netfilter.jar=jetbrains", configPath),
 	}
 
 	for _, config := range newConfigs {

@@ -171,7 +171,7 @@ func TestProcessVMOptionsFile(t *testing.T) {
 	}
 
 	// 验证新的 javaagent 被添加
-	expectedAgent := "-javaagent:\"" + normalizedConfigPath + "/ja-netfilter.jar\"=jetbrains"
+	expectedAgent := "-javaagent:" + normalizedConfigPath + "/ja-netfilter.jar=jetbrains"
 	if !strings.Contains(contentStr, expectedAgent) {
 		t.Errorf("新的 javaagent 配置缺失: %s", expectedAgent)
 	}
