@@ -19,14 +19,7 @@
 
 由于应用未经过 Apple 公证，首次运行时会被 macOS Gatekeeper 阻止。请按以下步骤操作：
 
-**方法 1：使用安装脚本（最简单）**
-
-1. 下载并解压 `.app.zip` 文件
-2. 在 Finder 中找到解压后的文件夹
-3. 双击运行 `install.sh` 脚本（会自动移除隔离属性）
-4. 按提示操作即可
-
-**方法 2：使用终端命令**
+**方法 1：使用终端命令（推荐）**
 
 1. 下载并解压 `.app.zip` 文件
 2. 打开终端（Terminal.app）
@@ -42,7 +35,7 @@ xattr -cr ~/Downloads/intellijapp.app
 
 4. 现在可以正常双击打开应用
 
-**方法 3：通过系统设置允许**
+**方法 2：通过系统设置允许**
 
 1. 尝试打开应用，会出现安全提示
 2. 打开"系统设置" → "隐私与安全性"
@@ -156,10 +149,10 @@ intellijapp/
 ```
 --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
 --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
--javaagent:"<配置路径>/ja-netfilter.jar"=jetbrains
+-javaagent:<配置路径>/ja-netfilter.jar=jetbrains
 ```
 
-> **注意**：路径使用引号包裹，支持包含空格的目录（如 `D:\Program Files\config`）。
+> **注意**：路径直接附加，即使包含空格也能正常工作（如 `D:\Program Files\config`）。
 
 ### 权限检查
 
@@ -195,62 +188,6 @@ intellijapp/
 - **后端日志**：查看控制台输出，所有操作都有详细日志
 - **前端调试**：应用内按 F12 打开开发者工具
 - **Bindings 更新**：修改 Go 结构体后记得重新生成 bindings
-
-## 版本历史
-
-### v1.0.4 (当前版本)
-
-**多架构支持：**
-- ✨ 新增 Windows ARM64 安装包（适用于 Surface Pro X 等 ARM 设备）
-- ✨ macOS 分离架构打包：arm64 和 amd64 独立发布（减小下载体积）
-- 📦 共支持 7 个平台/架构组合（Windows: amd64/arm64，macOS: amd64/arm64，Linux: amd64）
-
-**macOS 改进：**
-- 🛠️ 添加自动安装脚本 `install.sh`，一键解决 Gatekeeper 阻止问题
-- 📝 详细的 macOS 安装说明（3 种解决方法）
-- 🔧 改进代码签名流程，支持可选签名
-
-**发布改进：**
-- 🚀 GitHub Actions 自动构建所有架构版本
-- 🧹 自动清理临时文件，Release 更干净
-- 📋 标准化的文件命名：`intellijapp-{version}-{platform}-{arch}`
-
-### v1.0.3
-
-**文档改进：**
-- 📝 所有代码注释统一为中文，提高代码可读性
-- 📝 完善了所有私有函数的注释文档
-- 📝 main.go 中的注释全部翻译为中文
-- 📝 扩展了 README.md 文档（从 104 行扩展到 208 行）
-- 📝 添加了详细的版本历史记录
-
-**功能完善：**
-- ✨ 关于页面信息完全由后端管理（版本号、技术栈、开发者信息）
-- ✨ 支持多个开发者信息展示
-- ✨ 前端使用 `onMounted` 动态获取后端数据
-
-**代码质量：**
-- 🧪 所有函数都有完整的中文注释
-- 🧪 代码结构更加清晰易懂
-- 🧪 遵循 KISS、YAGNI、DRY、SOLID 原则
-
-### v1.0.2
-
-**修复：**
-- 🐛 删除了会导致 MCP 工具失败的 `nul` 文件
-- 🐛 修复了 `CONFIG_PATH_PATTERN` 正则表达式（现在支持空格、下划线等）
-- 🐛 精确清除配置，只删除本工具添加的特定行，不影响用户配置
-- 🐛 移除了未使用的 `time` 事件循环
-
-**改进：**
-- ✨ Go 版本使用 `runtime.Version()` 自动获取编译器版本
-- ✨ 添加了完善的权限检查机制
-- ✨ 跨平台错误提示（Windows/Linux/macOS）
-- 🗑️ 清理了未使用的 `HelloWorld.vue` 组件
-
-**代码质量：**
-- 📝 遵循 KISS、YAGNI、DRY、SOLID 原则
-- 🧪 代码结构更清晰，职责更明确
 
 ## 许可证
 
